@@ -11,6 +11,7 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
+import org.openqa.selenium.By;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,7 +36,7 @@ public class Tests {
     private WebDriver webDriver;
 
     @BeforeSuite
-    public void beforeSuite() throws IOException, InterruptedException {
+    public void beforeSuite() throws IOException {
         if (gridServer == null) {
             localhost = InetAddress.getLocalHost().getHostAddress();
             port = nextFreePort(4444, 4500);
@@ -54,8 +55,9 @@ public class Tests {
         }
     }
 
+    @Parameters({"udid"})
     @BeforeTest
-    public void beforeTest() throws IOException, InterruptedException {
+    public void beforeTest(@Optional String udid) throws IOException, InterruptedException {
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
         nodeConfiguration.hubHost = localhost;
         nodeConfiguration.hubPort = port;
@@ -81,42 +83,49 @@ public class Tests {
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
 
-        Thread.sleep(10000);
+        Thread.sleep(5000);
 
-    }
-
-    @Parameters({"udid"})
-    @Test
-    public void testing(@Optional String udid) throws MalformedURLException, InterruptedException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        if(udid!=null){
-            capabilities.setCapability(MobileCapabilityType.UDID,udid);
+        DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
+        if (udid != null) {
+            appiumCapabilities.setCapability(MobileCapabilityType.UDID, udid);
         }
-        capabilities.setCapability("browserName", "Android");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "device");
-        capabilities.setCapability("automationName", "UIAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
-        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, nextFreePort(5672, 5690));
+        appiumCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
+        appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
+        appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "UIAutomator2");
+        appiumCapabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
+        appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
+        appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, nextFreePort(5672, 5690));
 
 
-        driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), capabilities);
+        driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), appiumCapabilities);
     }
 
-    @AfterClass
-    public void afterClass() {
-//        if(driver!=null) {
-//            driver.quit();
-//        }
+    @BeforeMethod
+    public void beforeMethod(){
+        webDriver.navigate().refresh();
+    }
 
+    @Test
+    public void testSome(){
+        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
+        element.click();
+    }
+
+    @Test
+    public void testAnother(){
+        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
+        element.click();
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        driver.resetApp();
     }
 
     @AfterSuite
     public void afterSuite() {
-//        if(driver!=null) {
-//            driver.quit();
-//        }
+
         service.stop();
         gridServer.stop();
         webDriver.quit();

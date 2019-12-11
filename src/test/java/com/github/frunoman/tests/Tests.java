@@ -108,14 +108,12 @@ public class Tests {
 
     @Test
     public void testSome(){
-//        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
-//        element.click();
+
     }
 
     @Test
     public void testAnother(){
-//        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
-//        element.click();
+
     }
 
     @AfterMethod

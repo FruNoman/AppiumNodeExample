@@ -18,10 +18,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,24 +29,25 @@ public class Tests {
 
     @BeforeSuite
     public void beforeSuite() throws IOException, InterruptedException {
+        String localhost = InetAddress.getLocalHost().getHostAddress();
+        ServerSocket socket = new ServerSocket(0);
+        int port = 4444;
 
         GridHubConfiguration hubConfiguration = new GridHubConfiguration();
-        hubConfiguration.role = "hub";
-        hubConfiguration.host = "localhost";
-        hubConfiguration.port = 4450;
+        hubConfiguration.host = localhost;
+        hubConfiguration.port = port;
 
         gridServer = new Hub(hubConfiguration);
         gridServer.start();
 
 
-
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
-        nodeConfiguration.hubHost = "localhost";
-        nodeConfiguration.hubPort = 4450;
+        nodeConfiguration.hubHost =localhost;
+        nodeConfiguration.hubPort = port;
 
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME,"Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM,"Android");
+        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM, "Android");
 
         List<MutableCapabilities> capabilitiesList = new ArrayList<MutableCapabilities>();
         capabilitiesList.add(capabilities);
@@ -58,17 +56,18 @@ public class Tests {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("papa.json");
         file.deleteOnExit();
-        mapper.writeValue(file,nodeConfiguration.toJson());
+        mapper.writeValue(file, nodeConfiguration.toJson());
 
         builder = new AppiumServiceBuilder();
         builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
         builder.usingAnyFreePort();
         builder.withIPAddress(InetAddress.getLocalHost().getHostAddress());
-        builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE,file.getAbsolutePath());
+        builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE, file.getAbsolutePath());
         builder.build();
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
-        Thread.sleep(10000);
+
+        Thread.sleep(5000);
     }
 
     @Test
@@ -82,9 +81,7 @@ public class Tests {
         capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
 
 
-
-
-        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL("http://localhost:4450/wd/hub"), capabilities);
+        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), capabilities);
         System.out.println("");
         driver.quit();
         service.stop();

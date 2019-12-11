@@ -12,9 +12,10 @@ import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,23 +28,36 @@ import java.util.Random;
 public class Tests {
     private AppiumServiceBuilder builder;
     private AppiumDriverLocalService service;
-    private Hub gridServer;
+    private static Hub gridServer;
+    private static String localhost;
+    private static int port;
+    private AppiumDriver driver;
+    private WebDriver webDriver;
 
     @BeforeSuite
     public void beforeSuite() throws IOException, InterruptedException {
-        String localhost = InetAddress.getLocalHost().getHostAddress();
-        int port = nextFreePort(4444,4500);
+        if (gridServer == null) {
+            localhost = InetAddress.getLocalHost().getHostAddress();
+            port = nextFreePort(4444, 4500);
 
-        GridHubConfiguration hubConfiguration = new GridHubConfiguration();
-        hubConfiguration.host = localhost;
-        hubConfiguration.port = port;
+            GridHubConfiguration hubConfiguration = new GridHubConfiguration();
+            hubConfiguration.host = localhost;
+            hubConfiguration.port = port;
 
-        gridServer = new Hub(hubConfiguration);
-        gridServer.start();
+            gridServer = new Hub(hubConfiguration);
+            gridServer.start();
+            System.setProperty("webdriver.chrome.driver", this.getClass().getClassLoader().getResource("chromedriver").getPath());
 
 
+            webDriver = new ChromeDriver();
+            webDriver.get(gridServer.getUrl().toString() + "/grid/console");
+        }
+    }
+
+    @BeforeClass
+    public void beforeTest() throws IOException, InterruptedException {
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
-        nodeConfiguration.hubHost =localhost;
+        nodeConfiguration.hubHost = localhost;
         nodeConfiguration.hubPort = port;
 
         MutableCapabilities capabilities = new MutableCapabilities();
@@ -55,7 +69,7 @@ public class Tests {
         nodeConfiguration.capabilities = capabilitiesList;
 
         ObjectMapper mapper = new ObjectMapper();
-        File file = File.createTempFile("tmp"+new Date().getTime(),".json");
+        File file = File.createTempFile("tmp" + new Date().getTime(), ".json");
         mapper.writeValue(file, nodeConfiguration.toJson());
 
         builder = new AppiumServiceBuilder();
@@ -68,24 +82,34 @@ public class Tests {
         service.start();
 
         Thread.sleep(5000);
+
     }
 
     @Test
-    public void testing() throws MalformedURLException {
+    public void testing() throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("browserName", "Android");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "device");
-        capabilities.setCapability("automationName", "Appium");
+        capabilities.setCapability("automationName", "UIAutomator2");
         capabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
         capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
 
 
-        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), capabilities);
-        System.out.println("");
-        driver.quit();
+        driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), capabilities);
+        webDriver.navigate().refresh();
+    }
+
+    @AfterClass
+    public void afterClass() {
         service.stop();
+    }
+
+    @AfterSuite
+    public void afterSuite() {
         gridServer.stop();
+//        driver.quit();
+        webDriver.quit();
     }
 
     private boolean isLocalPortFree(int port) {

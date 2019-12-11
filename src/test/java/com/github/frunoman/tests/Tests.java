@@ -54,7 +54,7 @@ public class Tests {
         }
     }
 
-    @BeforeClass
+    @BeforeTest
     public void beforeTest() throws IOException, InterruptedException {
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
         nodeConfiguration.hubHost = localhost;
@@ -100,8 +100,9 @@ public class Tests {
         webDriver.navigate().refresh();
     }
 
-    @AfterClass
+    @AfterTest
     public void afterClass() {
+        driver.quit();
         service.stop();
     }
 

@@ -20,7 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Tests {
     private AppiumServiceBuilder builder;
@@ -30,8 +32,7 @@ public class Tests {
     @BeforeSuite
     public void beforeSuite() throws IOException, InterruptedException {
         String localhost = InetAddress.getLocalHost().getHostAddress();
-        ServerSocket socket = new ServerSocket(0);
-        int port = 4444;
+        int port = nextFreePort(4444,4500);
 
         GridHubConfiguration hubConfiguration = new GridHubConfiguration();
         hubConfiguration.host = localhost;
@@ -54,8 +55,7 @@ public class Tests {
         nodeConfiguration.capabilities = capabilitiesList;
 
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File("papa.json");
-        file.deleteOnExit();
+        File file = File.createTempFile("tmp"+new Date().getTime(),".json");
         mapper.writeValue(file, nodeConfiguration.toJson());
 
         builder = new AppiumServiceBuilder();
@@ -86,5 +86,23 @@ public class Tests {
         driver.quit();
         service.stop();
         gridServer.stop();
+    }
+
+    private boolean isLocalPortFree(int port) {
+        try {
+            new ServerSocket(port).close();
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    public int nextFreePort(int min, int max) {
+        int port = new Random().nextInt((max - min) + 1) + min;
+        while (true) {
+            if (isLocalPortFree(port)) {
+                return port;
+            }
+        }
     }
 }

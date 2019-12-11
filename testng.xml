@@ -2,12 +2,16 @@
 <suite name="Suite" parallel="tests"  thread-count="10" >
 
     <test name="androidTests">
+        <parameter name="udid" value="L91HVCPF2244Y" />
+
         <classes>
             <class name="com.github.frunoman.tests.Tests"/>
         </classes>
     </test>
 
     <test name="androidTests1">
+        <parameter name="udid" value="281559ac0105" />
+
         <classes>
             <class name="com.github.frunoman.tests.Tests"/>
         </classes>

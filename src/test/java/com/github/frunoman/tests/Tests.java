@@ -81,35 +81,44 @@ public class Tests {
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
 
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
     }
 
+    @Parameters({"udid"})
     @Test
-    public void testing() throws MalformedURLException, InterruptedException {
+    public void testing(@Optional String udid) throws MalformedURLException, InterruptedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        if(udid!=null){
+            capabilities.setCapability(MobileCapabilityType.UDID,udid);
+        }
         capabilities.setCapability("browserName", "Android");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "device");
         capabilities.setCapability("automationName", "UIAutomator2");
         capabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
         capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
+        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, nextFreePort(5672, 5690));
 
 
         driver = new AppiumDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), capabilities);
-        webDriver.navigate().refresh();
     }
 
-    @AfterTest
+    @AfterClass
     public void afterClass() {
-        driver.quit();
-        service.stop();
+//        if(driver!=null) {
+//            driver.quit();
+//        }
+
     }
 
     @AfterSuite
     public void afterSuite() {
+//        if(driver!=null) {
+//            driver.quit();
+//        }
+        service.stop();
         gridServer.stop();
-//        driver.quit();
         webDriver.quit();
     }
 

@@ -93,8 +93,8 @@ public class Tests {
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "UIAutomator2");
-        appiumCapabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
-        appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
+        appiumCapabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("app-debug.apk").getPath());
+        appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "com.github.allureadvanced.*");
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, nextFreePort(5672, 5690));
 
 
@@ -108,14 +108,14 @@ public class Tests {
 
     @Test
     public void testSome(){
-        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
-        element.click();
+//        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
+//        element.click();
     }
 
     @Test
     public void testAnother(){
-        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
-        element.click();
+//        MobileElement element = (MobileElement) driver.findElement(By.xpath("//*[@resource-id='ua.com.rozetka.shop:id/rl_background'][5]"));
+//        element.click();
     }
 
     @AfterMethod

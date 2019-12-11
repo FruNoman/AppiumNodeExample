@@ -8,7 +8,9 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
+import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeSuite;
@@ -26,28 +28,37 @@ import java.util.List;
 public class Tests {
     private AppiumServiceBuilder builder;
     private AppiumDriverLocalService service;
+    private Hub gridServer;
 
     @BeforeSuite
     public void beforeSuite() throws IOException, InterruptedException {
 
+        GridHubConfiguration hubConfiguration = new GridHubConfiguration();
+        hubConfiguration.role = "hub";
+        hubConfiguration.host = "localhost";
+        hubConfiguration.port = 4450;
 
-        GridNodeConfiguration configuration = new GridNodeConfiguration();
-        configuration.hubHost = "localhost";
-        configuration.hubPort = 4449;
+        gridServer = new Hub(hubConfiguration);
+        gridServer.start();
+
+
+
+        GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
+        nodeConfiguration.hubHost = "localhost";
+        nodeConfiguration.hubPort = 4450;
 
         MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME,"Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM,"Android");
-//        capabilities.setCapability(MobileCapabilityType.VERSION,"5.1");
 
         List<MutableCapabilities> capabilitiesList = new ArrayList<MutableCapabilities>();
         capabilitiesList.add(capabilities);
-        configuration.capabilities = capabilitiesList;
+        nodeConfiguration.capabilities = capabilitiesList;
 
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("papa.json");
         file.deleteOnExit();
-        mapper.writeValue(file,configuration.toJson());
+        mapper.writeValue(file,nodeConfiguration.toJson());
 
         builder = new AppiumServiceBuilder();
         builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
@@ -73,9 +84,10 @@ public class Tests {
 
 
 
-        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL("http://172.22.89.63:4449/wd/hub"), capabilities);
+        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL("http://localhost:4450/wd/hub"), capabilities);
         System.out.println("");
         driver.quit();
         service.stop();
+        gridServer.stop();
     }
 }

@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f5133a6-b91e-475c-b0f2-f6b0839086c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RemoteAppiumGrid.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/rozetka.apk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/pages/BasePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,66 +105,91 @@
       <option name="presentableId" value="Default" />
       <updated>1575981089745</updated>
     </task>
+    <task id="LOCAL-00001" summary="appium example">
+      <created>1576055376243</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576055376243</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="appium example" />
+    <option name="LAST_COMMIT_MESSAGE" value="appium example" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2508" y="214" width="800" height="677" key="#Project_Structure" timestamp="1575981458161">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2508" y="214" width="800" height="677" key="#Project_Structure/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575981458161" />
-    <state x="2623" y="261" width="570" height="582" key="#xdebugger.evaluate" timestamp="1575983710541">
+    <state x="2623" y="261" width="570" height="582" key="#xdebugger.evaluate" timestamp="1576056374885">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2623" y="261" width="570" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575983710541" />
+    <state x="2623" y="261" width="570" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576056374885" />
+    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2" timestamp="1576055376153">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576055376153" />
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl" timestamp="1575981446257">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575981446257" />
-    <state width="1807" height="270" key="GridCell.Tab.0.bottom" timestamp="1576050935327">
+    <state width="1807" height="334" key="GridCell.Tab.0.bottom" timestamp="1576058638433">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="270" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576050935327" />
-    <state width="1807" height="270" key="GridCell.Tab.0.center" timestamp="1576050935327">
+    <state width="1807" height="334" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
+    <state width="1807" height="334" key="GridCell.Tab.0.center" timestamp="1576058638433">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="270" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576050935327" />
-    <state width="1807" height="270" key="GridCell.Tab.0.left" timestamp="1576050935327">
+    <state width="1807" height="334" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
+    <state width="1807" height="334" key="GridCell.Tab.0.left" timestamp="1576058638433">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="270" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576050935327" />
-    <state width="1807" height="270" key="GridCell.Tab.0.right" timestamp="1576050935327">
+    <state width="1807" height="334" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
+    <state width="1807" height="334" key="GridCell.Tab.0.right" timestamp="1576058638433">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="270" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576050935327" />
-    <state width="1807" height="334" key="GridCell.Tab.1.bottom" timestamp="1575983846969">
+    <state width="1807" height="334" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
+    <state width="1807" height="334" key="GridCell.Tab.1.bottom" timestamp="1576058535972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575983846969" />
-    <state width="1807" height="334" key="GridCell.Tab.1.center" timestamp="1575983846969">
+    <state width="1807" height="334" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058535972" />
+    <state width="1807" height="334" key="GridCell.Tab.1.center" timestamp="1576058535972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575983846969" />
-    <state width="1807" height="334" key="GridCell.Tab.1.left" timestamp="1575983846969">
+    <state width="1807" height="334" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058535972" />
+    <state width="1807" height="334" key="GridCell.Tab.1.left" timestamp="1576058535972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575983846969" />
-    <state width="1807" height="334" key="GridCell.Tab.1.right" timestamp="1575983846969">
+    <state width="1807" height="334" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058535972" />
+    <state width="1807" height="334" key="GridCell.Tab.1.right" timestamp="1576058535972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575983846969" />
+    <state width="1807" height="334" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058535972" />
+    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1576055380373">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576055380373" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java</url>
-          <line>32</line>
+          <line>54</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java</url>
-          <line>27</line>
+          <line>48</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8f5133a6-b91e-475c-b0f2-f6b0839086c3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/android.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/android.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +48,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -128,30 +129,34 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2623" y="261" width="570" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576056374885" />
-    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2" timestamp="1576055376153">
+    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2" timestamp="1576058829977">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576055376153" />
+    <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058829977" />
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl" timestamp="1575981446257">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575981446257" />
-    <state width="1807" height="334" key="GridCell.Tab.0.bottom" timestamp="1576058638433">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom" timestamp="1576063305527">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
-    <state width="1807" height="334" key="GridCell.Tab.0.center" timestamp="1576058638433">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state width="1874" height="278" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576063305527" />
+    <state width="1807" height="270" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576062849626" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center" timestamp="1576063305527">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
-    <state width="1807" height="334" key="GridCell.Tab.0.left" timestamp="1576058638433">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state width="1874" height="278" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576063305527" />
+    <state width="1807" height="270" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576062849626" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left" timestamp="1576063305527">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
-    <state width="1807" height="334" key="GridCell.Tab.0.right" timestamp="1576058638433">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state width="1874" height="278" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576063305527" />
+    <state width="1807" height="270" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576062849626" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right" timestamp="1576063305527">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1807" height="334" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058638433" />
+    <state width="1874" height="278" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576063305527" />
+    <state width="1807" height="270" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576062849626" />
     <state width="1807" height="334" key="GridCell.Tab.1.bottom" timestamp="1576058535972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -168,10 +173,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1807" height="334" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058535972" />
-    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1576055380373">
+    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2" timestamp="1576058830906">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576055380373" />
+    <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058830906" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

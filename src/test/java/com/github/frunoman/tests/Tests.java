@@ -26,10 +26,10 @@ public class Tests {
         builder = new AppiumServiceBuilder();
         builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
         builder.usingAnyFreePort();
-        builder.withIPAddress("0.0.0.0");
-        builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE,"/home/dfrolov/IdeaProjects/AppiumUnixExample/src/main/resources/android.json");
+        builder.withIPAddress(InetAddress.getLocalHost().getHostAddress());
+        builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE,"/home/dfrolov/IdeaProjects/RemoteAppiumGrid/src/main/resources/android.json");
         builder.build();
-        service = AppiumDriverLocalService.buildService( builder);
+        service = AppiumDriverLocalService.buildService(builder);
         service.start();
     }
 
@@ -39,14 +39,14 @@ public class Tests {
         capabilities.setCapability("browserName", "Android");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "device");
-        capabilities.setCapability("automationName", "UiAutomator2");
+        capabilities.setCapability("automationName", "Appium");
         capabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("rozetka.apk").getPath());
         capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ua.com.rozetka.shop.*");
 
 
 
 
-        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL("http://172.22.89.63:4445/wd/hub"), capabilities);
+        AppiumDriver driver = new AppiumDriver<MobileElement>(new URL("http://172.22.89.63:4446/wd/hub"), capabilities);
         System.out.println("");
         driver.quit();
         service.stop();

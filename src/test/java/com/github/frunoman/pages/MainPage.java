@@ -77,4 +77,16 @@ public class MainPage extends BasePage {
         }
         return card;
     }
+
+    public void selectCard(MobileElement card){
+        card.click();
+    }
+
+    public void editCard(MobileElement card){
+        card.findElement(By.id(editButtonId)).click();
+    }
+
+    public void deleteCard(MobileElement card){
+        card.findElement(By.id(deleteButtonId)).click();
+    }
 }

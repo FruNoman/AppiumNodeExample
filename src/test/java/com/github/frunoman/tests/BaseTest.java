@@ -36,14 +36,14 @@ import java.util.Properties;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 
-public class Tests {
+public class BaseTest {
     private AppiumServiceBuilder builder;
     private AppiumDriverLocalService service;
     private static Hub gridServer;
     private static String localhost;
     private static int port;
-    private AndroidDriver driver;
-    private MainPage mainPage;
+    protected AndroidDriver driver;
+    protected MainPage mainPage;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
@@ -67,9 +67,10 @@ public class Tests {
         nodeConfiguration.hubHost = localhost;
         nodeConfiguration.hubPort = port;
 
-        MutableCapabilities capabilities = new MutableCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability("maxInstances", "1");
 
         List<MutableCapabilities> capabilitiesList = new ArrayList<MutableCapabilities>();
         capabilitiesList.add(capabilities);
@@ -84,20 +85,18 @@ public class Tests {
         builder.usingAnyFreePort();
         builder.withIPAddress(InetAddress.getLocalHost().getHostAddress());
         builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE, file.getAbsolutePath());
+        builder.withArgument(GeneralServerFlag.SESSION_OVERRIDE);
         builder.build();
         service = AppiumDriverLocalService.buildService(builder);
         service.start();
 
-        Thread.sleep(5000);
+        Thread.sleep(8000);
 
         DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
-//        if (udid != null) {
-//            appiumCapabilities.setCapability(MobileCapabilityType.UDID, udid);
-//        }
         appiumCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
-        appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "UIAutomator2");
+        appiumCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
         appiumCapabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("app-debug.apk").getPath());
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "com.github.allureadvanced.*");
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, Utils.nextFreePort(5672, 5690));
@@ -111,17 +110,6 @@ public class Tests {
         mainPage = new MainPage(driver);
     }
 
-    @Test
-    public void testAddResultButton() throws InterruptedException {
-        mainPage.clickOnAddResultButton();
-        PopupPage popupPage = new PopupPage(driver);
-        popupPage.selectFileByName("sdcard");
-        popupPage.selectFileByName("allure-results(3).zip");
-        popupPage.clickSelect();
-        MobileElement card = mainPage.findCardByName("allure-results(3).zip");
-        MatcherAssert.assertThat(true,is(card.isEnabled()));
-        Thread.sleep(10000);
-    }
 
     @AfterMethod
     public void afterMethod() {
@@ -129,10 +117,9 @@ public class Tests {
     }
 
     @AfterSuite
-    public void afterSuite() throws InterruptedException {
+    public void afterSuite() {
         service.stop();
         gridServer.stop();
-        Thread.sleep(10000);
     }
 
 

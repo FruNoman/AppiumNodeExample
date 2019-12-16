@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     private AppiumServiceBuilder builder;
@@ -105,6 +106,7 @@ public class BaseTest {
 
         driver = new AndroidDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), appiumCapabilities);
         driver.allowInvisibleElements(true);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
         driver.pushFile(ALLURE_RESULTS_ZIP, new File(classLoader.getResource(ALLURE_RESULT_FILE).getPath()));
 
@@ -123,6 +125,7 @@ public class BaseTest {
 
     @AfterSuite
     public void afterSuite() {
+        driver.quit();
         service.stop();
         gridServer.stop();
     }

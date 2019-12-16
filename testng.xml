@@ -5,7 +5,7 @@
         <parameter name="udid" value="L91HVCPF2244Y" />
 
         <classes>
-            <class name="com.github.frunoman.tests.BaseTest"/>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
         </classes>
     </test>
 

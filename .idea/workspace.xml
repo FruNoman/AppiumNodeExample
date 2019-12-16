@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f5133a6-b91e-475c-b0f2-f6b0839086c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/AddResultTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/allure-results.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/project.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/pages/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/appium.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/chromedriver" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/pages/PopupPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/pages/PopupPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/AddResultTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/AddResultTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/BaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/testng.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,35 +55,22 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AppiumUnixExample" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/test_results" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.AddResultTests">
-    <configuration name="AddResultTests" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="RemoteAppiumGrid" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.github.frunoman.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.github.frunoman.tests" />
-      <option name="MAIN_CLASS_NAME" value="com.github.frunoman.tests.AddResultTests" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="TestNG./home/dfrolov/IdeaProjects/RemoteAppiumGrid/testng.xml">
     <configuration name="BaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="RemoteAppiumGrid" />
       <extension name="coverage">
@@ -114,6 +106,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ResultBoardTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="RemoteAppiumGrid" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.github.frunoman.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.github.frunoman.tests" />
+      <option name="MAIN_CLASS_NAME" value="com.github.frunoman.tests.ResultBoardTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="/home/dfrolov/IdeaProjects/RemoteAppiumGrid/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="RemoteAppiumGrid" />
       <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
@@ -126,10 +135,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.AddResultTests" />
+        <item itemvalue="TestNG./home/dfrolov/IdeaProjects/RemoteAppiumGrid/testng.xml" />
+        <item itemvalue="TestNG.ResultBoardTests" />
         <item itemvalue="TestNG.BaseTest.testAddResultButton" />
         <item itemvalue="TestNG.BaseTest" />
-        <item itemvalue="TestNG./home/dfrolov/IdeaProjects/RemoteAppiumGrid/testng.xml" />
       </list>
     </recent_temporary>
   </component>
@@ -247,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576493133533</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="appium example">
+      <created>1576496114856</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1576496114856</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -259,65 +275,65 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2508" y="214" width="800" height="677" key="#Project_Structure/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1575981458161" />
-    <state x="703" y="281" width="1208" height="582" key="#xdebugger.evaluate" timestamp="1576492904971">
+    <state x="747" y="349" width="1208" height="582" key="#xdebugger.evaluate" timestamp="1576501024717">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="703" y="281" width="1119" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576492904971" />
+    <state x="747" y="349" width="1119" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501024717" />
     <state x="2209" y="255" width="1208" height="582" key="#xdebugger.evaluate/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576158372159" />
-    <state x="584" y="172" width="800" height="807" key="CommitChangelistDialog2" timestamp="1576493131364">
+    <state x="584" y="172" width="800" height="807" key="CommitChangelistDialog2" timestamp="1576496114767">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="584" y="172" width="800" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576493131364" />
+    <state x="584" y="172" width="800" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496114767" />
     <state x="2504" y="149" width="808" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058829977" />
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl" timestamp="1576141977820">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="316" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576071462896" />
     <state x="2685" y="296" width="447" height="513" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576141977820" />
-    <state width="1874" height="277" key="GridCell.Tab.0.bottom" timestamp="1576496047951">
+    <state width="1874" height="277" key="GridCell.Tab.0.bottom" timestamp="1576501267683">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="277" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496047951" />
+    <state width="1874" height="277" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501267683" />
     <state width="1807" height="333" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="277" key="GridCell.Tab.0.center" timestamp="1576496047951">
+    <state width="1874" height="277" key="GridCell.Tab.0.center" timestamp="1576501267683">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="277" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496047951" />
+    <state width="1874" height="277" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501267683" />
     <state width="1807" height="333" key="GridCell.Tab.0.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="277" key="GridCell.Tab.0.left" timestamp="1576496047951">
+    <state width="1874" height="277" key="GridCell.Tab.0.left" timestamp="1576501267683">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="277" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496047951" />
+    <state width="1874" height="277" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501267683" />
     <state width="1807" height="333" key="GridCell.Tab.0.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="277" key="GridCell.Tab.0.right" timestamp="1576496047951">
+    <state width="1874" height="277" key="GridCell.Tab.0.right" timestamp="1576501267683">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="277" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496047951" />
+    <state width="1874" height="277" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501267683" />
     <state width="1807" height="333" key="GridCell.Tab.0.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1576495475979">
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom" timestamp="1576501028223">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576495475979" />
+    <state width="1874" height="343" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501028223" />
     <state width="1807" height="333" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1576495475979">
+    <state width="1874" height="343" key="GridCell.Tab.1.center" timestamp="1576501028223">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576495475979" />
+    <state width="1874" height="343" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501028223" />
     <state width="1807" height="333" key="GridCell.Tab.1.center/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1576495475979">
+    <state width="1874" height="343" key="GridCell.Tab.1.left" timestamp="1576501028223">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576495475979" />
+    <state width="1874" height="343" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501028223" />
     <state width="1807" height="333" key="GridCell.Tab.1.left/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1576495475979">
+    <state width="1874" height="343" key="GridCell.Tab.1.right" timestamp="1576501028223">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="343" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576495475979" />
+    <state width="1874" height="343" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576501028223" />
     <state width="1807" height="333" key="GridCell.Tab.1.right/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576159004185" />
-    <state x="588" y="297" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1576493135934">
+    <state x="588" y="297" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1576496115661">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="588" y="297" width="800" height="528" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576493135934" />
+    <state x="588" y="297" width="800" height="528" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@0.27.1920.1053" timestamp="1576496115661" />
     <state x="2508" y="277" width="800" height="551" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1576058830906" />
     <state width="1695" height="560" key="XDebugger.FullValuePopup" timestamp="1576158009589">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -353,8 +369,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/github/frunoman/tests/BaseTest.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="8" />
+          <line>108</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

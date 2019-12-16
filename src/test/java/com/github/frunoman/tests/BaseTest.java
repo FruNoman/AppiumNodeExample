@@ -2,9 +2,7 @@ package com.github.frunoman.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.frunoman.pages.MainPage;
-import com.github.frunoman.pages.PopupPage;
 import com.github.frunoman.utils.Utils;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
@@ -12,29 +10,21 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
-import org.hamcrest.Matcher;
-import org.hamcrest.MatcherAssert;
 import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.Is.is;
 
 public class BaseTest {
     private AppiumServiceBuilder builder;
@@ -44,9 +34,21 @@ public class BaseTest {
     private static int port;
     protected AndroidDriver driver;
     protected MainPage mainPage;
+    private Properties properties;
+    private static final String APPIUM_MAIN_JS_PATH = "appium.main.js.path";
+    private static final String PROJECT_PROPERTIES = "project.properties";
+    private static final String APP_WAIT_ACTIVITY = "com.github.allureadvanced.*";
+    private static final String ALLURE_RESULTS_ZIP = "/sdcard/allure-results.zip";
+    protected static final String ALLURE_RESULT_FILE = "allure-results.zip";
+
+    private ClassLoader classLoader;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
+        classLoader = getClass().getClassLoader();
+        properties = new Properties();
+        properties.load(new FileInputStream(new File(classLoader.getResource(PROJECT_PROPERTIES).getPath())));
+
         if (gridServer == null) {
             localhost = InetAddress.getLocalHost().getHostAddress();
             port = Utils.nextFreePort(4444, 4500);
@@ -81,7 +83,7 @@ public class BaseTest {
         mapper.writeValue(file, nodeConfiguration.toJson());
 
         builder = new AppiumServiceBuilder();
-        builder.withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"));
+        builder.withAppiumJS(new File(properties.getProperty(APPIUM_MAIN_JS_PATH)));
         builder.usingAnyFreePort();
         builder.withIPAddress(InetAddress.getLocalHost().getHostAddress());
         builder.withArgument(GeneralServerFlag.CONFIGURATION_FILE, file.getAbsolutePath());
@@ -97,12 +99,15 @@ public class BaseTest {
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
         appiumCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-        appiumCapabilities.setCapability(MobileCapabilityType.APP, getClass().getClassLoader().getResource("app-debug.apk").getPath());
-        appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "com.github.allureadvanced.*");
+        appiumCapabilities.setCapability(MobileCapabilityType.APP, classLoader.getResource("app-debug.apk").getPath());
+        appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, APP_WAIT_ACTIVITY);
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, Utils.nextFreePort(5672, 5690));
 
         driver = new AndroidDriver<MobileElement>(new URL(gridServer.getUrl().toString() + "/wd/hub"), appiumCapabilities);
         driver.allowInvisibleElements(true);
+
+        driver.pushFile(ALLURE_RESULTS_ZIP, new File(classLoader.getResource(ALLURE_RESULT_FILE).getPath()));
+
     }
 
     @BeforeMethod

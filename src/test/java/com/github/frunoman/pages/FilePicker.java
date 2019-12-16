@@ -5,7 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import java.util.List;
 
-public class PopupPage extends BasePage {
+public class FilePicker extends BasePage {
     @AndroidFindBy(uiAutomator = "com.github.allure:id/file_mark")
     private List<MobileElement> fileMark;
     @AndroidFindBy(id = "com.github.allure:id/fname")
@@ -15,7 +15,7 @@ public class PopupPage extends BasePage {
     @AndroidFindBy(id = "com.github.allure:id/cancel")
     private MobileElement cancel;
 
-    public PopupPage(AndroidDriver driver) {
+    public FilePicker(AndroidDriver driver) {
         super(driver);
     }
 

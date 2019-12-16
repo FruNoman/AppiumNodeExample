@@ -73,7 +73,6 @@ public class BaseTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability("maxInstances", "1");
 
         List<MutableCapabilities> capabilitiesList = new ArrayList<MutableCapabilities>();
         capabilitiesList.add(capabilities);

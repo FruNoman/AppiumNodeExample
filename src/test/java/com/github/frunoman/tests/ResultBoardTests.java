@@ -14,7 +14,6 @@ public class ResultBoardTests extends BaseTest {
     private static final String SDCARD = "sdcard";
     private static final String UNEXPECTED_ELEMENT_STATE = "Unexpected element state";
     private static final String UNEXPECTED_ELEMENT_NAME = "Unexpected element name";
-
     private static final String TOP_NAME = "ALLURE REPORT";
 
     @Test(priority = 1)

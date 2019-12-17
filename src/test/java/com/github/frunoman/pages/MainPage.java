@@ -5,11 +5,11 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class MainPage extends BasePage {
-
     @AndroidFindBy(id = "com.github.allure:id/action_search")
     private MobileElement searchButton;
     @AndroidFindBy(id = "com.github.allure:id/add_result")

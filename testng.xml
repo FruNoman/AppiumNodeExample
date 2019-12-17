@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="tests"  thread-count="10" >
+<suite name="Suite" parallel="instances"  thread-count="10" >
 
     <test name="androidTests">
         <parameter name="udid" value="L91HVCPF2244Y" />

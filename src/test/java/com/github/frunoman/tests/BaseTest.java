@@ -95,10 +95,9 @@ public class BaseTest {
         Thread.sleep(8000);
 
         DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
-        appiumCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
-        appiumCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
+        appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "UiAutomator2");
         appiumCapabilities.setCapability(MobileCapabilityType.APP, classLoader.getResource("app-debug.apk").getPath());
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, APP_WAIT_ACTIVITY);
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, Utils.nextFreePort(5672, 5690));
@@ -123,10 +122,11 @@ public class BaseTest {
     }
 
     @AfterSuite
-    public void afterSuite() {
+    public void afterSuite() throws InterruptedException {
         driver.quit();
         service.stop();
         gridServer.stop();
+        Thread.sleep(5000);
     }
 
 

@@ -1,19 +1,5 @@
 package com.github.frunoman.tests;
 
-import com.android.prefs.AndroidLocation;
-import com.android.repository.api.ProgressIndicator;
-import com.android.repository.api.RepoManager;
-import com.android.sdklib.IAndroidTarget;
-import com.android.sdklib.ISystemImage;
-import com.android.sdklib.devices.DeviceManager;
-import com.android.sdklib.internal.avd.AvdInfo;
-import com.android.sdklib.internal.avd.AvdManager;
-import com.android.sdklib.repository.AndroidSdkHandler;
-import com.android.sdklib.repository.targets.AndroidTargetManager;
-import com.android.sdklib.repository.targets.SystemImageManager;
-import com.android.sdklib.tool.SdkManagerCli;
-import com.android.utils.ILogger;
-import com.android.utils.SdkUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.frunoman.pages.MainPage;
 import com.github.frunoman.utils.Utils;
@@ -57,7 +43,6 @@ public class BaseTest {
     private static final String ALLURE_RESULTS_ZIP = "/sdcard/allure-results.zip";
     private static final String APK = "app-debug.apk";
     protected static final String ALLURE_RESULT_FILE = "allure-results.zip";
-    protected AvdManager avdManager;
 
 
     @BeforeSuite

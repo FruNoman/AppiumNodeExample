@@ -57,6 +57,11 @@
             <artifactId>ddmlib</artifactId>
             <version>25.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.android.tools</groupId>
+            <artifactId>sdklib</artifactId>
+            <version>25.3.0</version>
+        </dependency>
 
     </dependencies>
 

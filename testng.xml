@@ -1,13 +1,39 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="instances"  thread-count="10" >
+<suite name="Suite" parallel="tests"  thread-count="10" >
 
-    <test name="androidTests">
-        <parameter name="udid" value="L91HVCPF2244Y" />
+<!--    <test name="tab">-->
+<!--&lt;!&ndash;        <parameter name="udid" value="emulator-5554" />&ndash;&gt;-->
+<!--        <parameter name="version" value="7.0" />-->
 
+<!--        <classes>-->
+<!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="android">-->
+<!--&lt;!&ndash;        <parameter name="udid" value="L91HVCPF2244Y" />&ndash;&gt;-->
+<!--        <parameter name="version" value="5.1" />-->
+<!--        <classes>-->
+<!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+
+    <test name="pixel">
+<!--        <parameter name="udid" value="emulator-5556" />-->
+<!--        <parameter name="version" value="8.0" />-->
         <classes>
             <class name="com.github.frunoman.tests.ResultBoardTests"/>
         </classes>
     </test>
+
+<!--    <test name="pixel2">-->
+<!--        <parameter name="udid" value="emulator-5558" />-->
+<!--        &lt;!&ndash;        <parameter name="version" value="7.0" />&ndash;&gt;-->
+<!--        <classes>-->
+<!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
 

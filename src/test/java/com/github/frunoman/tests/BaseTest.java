@@ -55,6 +55,7 @@ public class BaseTest {
     private static final String PROJECT_PROPERTIES = "project.properties";
     private static final String APP_WAIT_ACTIVITY = "com.github.allureadvanced.*";
     private static final String ALLURE_RESULTS_ZIP = "/sdcard/allure-results.zip";
+    private static final String APK = "app-debug.apk";
     protected static final String ALLURE_RESULT_FILE = "allure-results.zip";
     protected AvdManager avdManager;
 
@@ -123,7 +124,7 @@ public class BaseTest {
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
         appiumCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
 
-        appiumCapabilities.setCapability(MobileCapabilityType.APP, Resources.getResource("app-debug.apk").getPath());
+        appiumCapabilities.setCapability(MobileCapabilityType.APP, Resources.getResource(APK).getPath());
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, APP_WAIT_ACTIVITY);
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, Utils.nextFreePort(5672, 5690));

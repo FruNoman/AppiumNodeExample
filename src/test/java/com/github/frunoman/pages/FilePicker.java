@@ -3,6 +3,8 @@ package com.github.frunoman.pages;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.qameta.allure.Step;
+
 import java.util.List;
 
 public class FilePicker extends BasePage {
@@ -19,15 +21,17 @@ public class FilePicker extends BasePage {
         super(driver);
     }
 
-
+    @Step("Select file by name {0}")
     public void selectFileByName(String str) {
        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + str + "\").instance(0))").click();
     }
 
+    @Step("Click select button")
     public void clickSelect(){
         select.click();
     }
 
+    @Step("Click cancel button")
     public void clickCancel(){
         cancel.click();
     }

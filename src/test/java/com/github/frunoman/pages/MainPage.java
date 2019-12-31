@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -32,61 +33,71 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
+    @Step("Click on 'ADD RESULT' button")
     public void clickOnAddResultButton() {
         addResultButton.click();
     }
 
+    @Step("Click on search button")
     public void clickSearchButton() {
         searchButton.click();
     }
 
+    @Step("Search result  by text '{0}'")
     public void searchResult(String text) {
         topSearchField.sendKeys(text);
     }
 
+    @Step("Select card by name '{0}'")
     public void selectCardByName(String cardName) {
-        for (MobileElement element:cardViews){
-            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)){
+        for (MobileElement element : cardViews) {
+            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)) {
                 element.click();
             }
         }
     }
 
+    @Step("Edit card by name '{0}'")
     public void editCardByName(String cardName) {
-        for (MobileElement element:cardViews){
-            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)){
+        for (MobileElement element : cardViews) {
+            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)) {
                 element.findElement(By.id(editButtonId)).click();
             }
         }
     }
 
+    @Step("Delete card by name '{0}'")
     public void deleteCardByName(String cardName) {
-        for (MobileElement element:cardViews){
-            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)){
+        for (MobileElement element : cardViews) {
+            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)) {
                 element.findElement(By.id(deleteButtonId)).click();
             }
         }
     }
 
-    public MobileElement findCardByName(String cardName){
+    @Step("Find card by name '{0}'")
+    public MobileElement findCardByName(String cardName) {
         MobileElement card = null;
-        for (MobileElement element:cardViews){
-            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)){
-               card = element;
+        for (MobileElement element : cardViews) {
+            if (element.findElement(By.id(resultTextId)).getText().equals(cardName)) {
+                card = element;
             }
         }
         return card;
     }
 
-    public void selectCard(MobileElement card){
+    @Step("Select card by mobile element")
+    public void selectCard(MobileElement card) {
         card.click();
     }
 
-    public void editCard(MobileElement card){
+    @Step("Edit card by mobile element")
+    public void editCard(MobileElement card) {
         card.findElement(By.id(editButtonId)).click();
     }
 
-    public void deleteCard(MobileElement card){
+    @Step("Delete card by mobile element")
+    public void deleteCard(MobileElement card) {
         card.findElement(By.id(deleteButtonId)).click();
     }
 }

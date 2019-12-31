@@ -1,6 +1,7 @@
 package com.github.frunoman.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.frunoman.listeners.TestrailListener;
 import com.github.frunoman.pages.MainPage;
 import com.github.frunoman.utils.Utils;
 import com.google.common.io.Resources;
@@ -28,6 +29,7 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+@Listeners({TestrailListener.class})
 public class BaseTest {
     private AppiumServiceBuilder builder;
     private AppiumDriverLocalService service;

@@ -10,6 +10,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,7 +21,9 @@ public class TestrailListener implements ITestListener {
     private static final String PASSWORD = "testrail.password";
     private static final String PROJECT = "testrail.project";
     private static final String SUITE = "testrail.suite";
-
+    private static final String RUN_NAME = "testrail.run.name";
+    private static final String DATE_FORMAT_PATTERN = "MM-dd-yyyy HH:mm:ss";
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_PATTERN);
 
     private static final String PROJECT_PROPERTIES = "project.properties";
 
@@ -55,7 +59,7 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        if(caseId!=null) {
+        if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
             testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(1), customResultFields).execute();
         }
@@ -64,7 +68,7 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        if(caseId!=null) {
+        if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
             testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(5), customResultFields).execute();
         }
@@ -73,7 +77,7 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        if(caseId!=null) {
+        if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
             testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(3), customResultFields).execute();
         }
@@ -87,7 +91,13 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        run = testRail.runs().add(currentProject.getId(), new Run().setSuiteId(currentSuite.getId()).setName("Testing")).execute();
+        run = testRail
+                .runs()
+                .add(currentProject.getId(),
+                        new Run()
+                                .setSuiteId(currentSuite.getId())
+                                .setName(properties.getProperty(RUN_NAME) + " " + SIMPLE_DATE_FORMAT.format(new Date())))
+                .execute();
     }
 
     @Override

@@ -19,6 +19,7 @@ import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.os.CommandLine;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -156,16 +157,18 @@ public class BaseTest {
         driver.resetApp();
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void afterSuite() throws InterruptedException {
         if(driver!=null) {
             driver.quit();
         }if(service.isRunning()) {
             service.stop();
+            Thread.sleep(3000);
         }if(gridServer.getUrl()!=null) {
             gridServer.stop();
+            Thread.sleep(3000);
         }
-        Thread.sleep(5000);
+
     }
 
 

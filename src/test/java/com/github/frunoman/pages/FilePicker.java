@@ -21,17 +21,17 @@ public class FilePicker extends BasePage {
         super(driver);
     }
 
-    @Step("Select file by name {0}")
+    @Step("Select file by name '{0}'")
     public void selectFileByName(String str) {
        driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"" + str + "\").instance(0))").click();
     }
 
-    @Step("Click select button")
+    @Step("Click 'Select' button")
     public void clickSelect(){
         select.click();
     }
 
-    @Step("Click cancel button")
+    @Step("Click 'Cancel' button")
     public void clickCancel(){
         cancel.click();
     }

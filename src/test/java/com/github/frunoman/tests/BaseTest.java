@@ -7,23 +7,26 @@ import com.github.frunoman.utils.Utils;
 import com.google.common.io.Resources;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import io.qameta.allure.Attachment;
+import org.apache.commons.io.FileUtils;
 import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.annotations.Optional;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -125,11 +128,20 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         mainPage = new MainPage(driver);
+        driver.startRecordingScreen(new AndroidStartScreenRecordingOptions().withVideoSize("480x320").withBitRate(15000000));
     }
 
 
     @AfterMethod
-    public void afterMethod() {
+    public void afterMethod(ITestResult result) throws IOException {
+        String video = driver.stopRecordingScreen();
+        if(result.getStatus() == ITestResult.FAILURE) {
+            byte[] decode = Base64.getDecoder().decode(video);
+            String fileName = "AndroidRego" + new Date().getTime() + ".mp4";
+            File file = new File("./allure-results/" + fileName);
+            FileUtils.writeByteArrayToFile(file, decode);
+            saveVideo(file);
+        }
         driver.resetApp();
     }
 
@@ -139,6 +151,26 @@ public class BaseTest {
         service.stop();
         gridServer.stop();
         Thread.sleep(5000);
+    }
+
+    @Attachment(value = "Video", type = "video/mp4")
+    public byte[] saveVideo(File video) {
+        byte[] screenShot = new byte[0];
+        try {
+            FileInputStream fis = new FileInputStream(video);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+
+            for (int readNum; (readNum = fis.read(b)) != -1;) {
+                bos.write(b, 0, readNum);
+            }
+            screenShot = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return screenShot;
     }
 
 

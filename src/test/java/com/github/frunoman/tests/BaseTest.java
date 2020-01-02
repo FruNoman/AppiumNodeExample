@@ -26,7 +26,6 @@ import org.testng.annotations.Optional;
 
 import java.io.*;
 import java.net.*;
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -39,9 +38,12 @@ public class BaseTest {
     private static int port;
     protected AndroidDriver driver;
     protected MainPage mainPage;
-    private Properties properties;
+    private static Properties properties;
     private static final String APPIUM_MAIN_JS_PATH = "appium.main.js.path";
     private static final String PROJECT_PROPERTIES = "project.properties";
+    private static final String SCREEN_RECORD_RESOLUTION = "screen.record.resolution";
+    private static final String SCREEN_RECORD_BITRATE = "screen.record.bitrate";
+    private static final String SCREEN_RECORD_NAME = "screen.record.name";
     private static final String APP_WAIT_ACTIVITY = "com.github.allureadvanced.*";
     private static final String ALLURE_RESULTS_ZIP = "/sdcard/allure-results.zip";
     private static final String APK = "app-debug.apk";
@@ -50,9 +52,10 @@ public class BaseTest {
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
-        properties = new Properties();
-        properties.load(new FileInputStream(new File(Resources.getResource(PROJECT_PROPERTIES).getPath())));
-
+        if(properties==null) {
+            properties = new Properties();
+            properties.load(new FileInputStream(new File(Resources.getResource(PROJECT_PROPERTIES).getPath())));
+        }
         if (gridServer == null) {
             localhost = InetAddress.getLocalHost().getHostAddress();
             port = Utils.nextFreePort(4444, 4500);
@@ -66,9 +69,9 @@ public class BaseTest {
         }
     }
 
-    @Parameters({"udid","version"})
+    @Parameters({"udid", "version"})
     @BeforeTest
-    public void beforeTest(@Optional String udid,@Optional String version) throws IOException, InterruptedException {
+    public void beforeTest(@Optional String udid, @Optional String version) throws IOException, InterruptedException {
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
         nodeConfiguration.hubHost = localhost;
         nodeConfiguration.hubPort = port;
@@ -77,9 +80,9 @@ public class BaseTest {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM, "Android");
 
-        if (version!=null){
-            capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,version);
-            capabilities.setCapability("version",version);
+        if (version != null) {
+            capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
+            capabilities.setCapability("version", version);
 
         }
         List<MutableCapabilities> capabilitiesList = new ArrayList<MutableCapabilities>();
@@ -102,11 +105,11 @@ public class BaseTest {
 
         Thread.sleep(10000);
         DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
-        if (udid!=null){
-            appiumCapabilities.setCapability(MobileCapabilityType.UDID,udid);
+        if (udid != null) {
+            appiumCapabilities.setCapability(MobileCapabilityType.UDID, udid);
         }
-        if (version!=null){
-            appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,version);
+        if (version != null) {
+            appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
         }
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
@@ -128,49 +131,41 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         mainPage = new MainPage(driver);
-        driver.startRecordingScreen(new AndroidStartScreenRecordingOptions().withVideoSize("480x320").withBitRate(15000000));
+        driver.startRecordingScreen(
+                new AndroidStartScreenRecordingOptions()
+                        .withVideoSize(properties.getProperty(SCREEN_RECORD_RESOLUTION))
+                        .withBitRate(Integer.parseInt(properties.getProperty(SCREEN_RECORD_BITRATE)))
+        );
     }
 
 
     @AfterMethod
     public void afterMethod(ITestResult result) throws IOException {
         String video = driver.stopRecordingScreen();
-        if(result.getStatus() == ITestResult.FAILURE) {
+        if (result.getStatus() == ITestResult.FAILURE) {
             byte[] decode = Base64.getDecoder().decode(video);
-            String fileName = "AndroidRego" + new Date().getTime() + ".mp4";
-            File file = new File("./allure-results/" + fileName);
+            String fileName = "./allure-results/"
+                    + properties.getProperty(SCREEN_RECORD_NAME)
+                    + "_"
+                    + new Date().getTime()
+                    + ".mp4";
+            File file = new File(fileName);
             FileUtils.writeByteArrayToFile(file, decode);
-            saveVideo(file);
+            Utils.attachVideo(file);
         }
         driver.resetApp();
     }
 
     @AfterSuite
     public void afterSuite() throws InterruptedException {
-        driver.quit();
-        service.stop();
-        gridServer.stop();
-        Thread.sleep(5000);
-    }
-
-    @Attachment(value = "Video", type = "video/mp4")
-    public byte[] saveVideo(File video) {
-        byte[] screenShot = new byte[0];
-        try {
-            FileInputStream fis = new FileInputStream(video);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] b = new byte[1024];
-
-            for (int readNum; (readNum = fis.read(b)) != -1;) {
-                bos.write(b, 0, readNum);
-            }
-            screenShot = bos.toByteArray();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(driver!=null) {
+            driver.quit();
+        }if(service.isRunning()) {
+            service.stop();
+        }if(gridServer.getUrl()!=null) {
+            gridServer.stop();
         }
-        return screenShot;
+        Thread.sleep(5000);
     }
 
 

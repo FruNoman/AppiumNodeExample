@@ -2,8 +2,9 @@ package com.github.frunoman.utils;
 
 import com.codepine.api.testrail.model.Project;
 import com.codepine.api.testrail.model.Suite;
+import io.qameta.allure.Attachment;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.util.List;
 import java.util.Random;
@@ -60,5 +61,25 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    @Attachment(value = "Video", type = "video/mp4")
+    public static byte[] attachVideo(File video) {
+        byte[] screenShot = new byte[0];
+        try {
+            FileInputStream fis = new FileInputStream(video);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+
+            for (int readNum; (readNum = fis.read(b)) != -1; ) {
+                bos.write(b, 0, readNum);
+            }
+            screenShot = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return screenShot;
     }
 }

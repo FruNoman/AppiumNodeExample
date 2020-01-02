@@ -19,21 +19,26 @@
 <!--    </test>-->
 
 
-    <test name="pixel">
-<!--        <parameter name="udid" value="emulator-5556" />-->
-<!--        <parameter name="version" value="8.0" />-->
+    <test name="m 3 note">
+        <parameter name="udid" value="L91HVCPF2244Y" />
         <classes>
             <class name="com.github.frunoman.tests.ResultBoardTests"/>
         </classes>
     </test>
 
-<!--    <test name="pixel2">-->
-<!--        <parameter name="udid" value="emulator-5558" />-->
-<!--        &lt;!&ndash;        <parameter name="version" value="7.0" />&ndash;&gt;-->
-<!--        <classes>-->
-<!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="pixel 2 phone">
+        <parameter name="udid" value="emulator-5554" />
+        <classes>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
+        </classes>
+    </test>
+
+    <test name="pixel 2 tablet">
+        <parameter name="udid" value="emulator-5556" />
+        <classes>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
+        </classes>
+    </test>
 
 
 

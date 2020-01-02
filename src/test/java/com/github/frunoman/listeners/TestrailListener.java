@@ -4,6 +4,8 @@ import com.codepine.api.testrail.TestRail;
 import com.codepine.api.testrail.model.*;
 import com.github.frunoman.utils.Utils;
 import com.google.common.io.Resources;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureLifecycle;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -59,6 +61,7 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        AllureLifecycle allureLifecycle = Allure.getLifecycle();
         if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
             testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(1), customResultFields).execute();

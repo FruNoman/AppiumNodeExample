@@ -28,7 +28,6 @@ public class ResultBoardTests extends BaseTest {
             priority = 1,
             testName = "1")
     public void successAddResultTest() {
-        Assert.fail();
         mainPage.clickOnAddResultButton();
         FilePicker filePicker = new FilePicker(driver);
         filePicker.selectFileByName(SDCARD);

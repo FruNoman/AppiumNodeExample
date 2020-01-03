@@ -61,7 +61,6 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        AllureLifecycle allureLifecycle = Allure.getLifecycle();
         if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
             testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(1), customResultFields).execute();
@@ -73,7 +72,14 @@ public class TestrailListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         if (caseId != null) {
             List<ResultField> customResultFields = testRail.resultFields().list().execute();
-            testRail.results().addForCase(run.getId(), caseId, new Result().setStatusId(5), customResultFields).execute();
+            Result result = new Result();
+            result.setStatusId(5);
+            StringBuilder builder = new StringBuilder();
+            for (StackTraceElement element : iTestResult.getThrowable().getStackTrace()) {
+                builder.append(element.toString() + "\n");
+            }
+            result.setComment(builder.toString());
+            testRail.results().addForCase(run.getId(), caseId, result, customResultFields).execute();
         }
         caseId = null;
     }
@@ -94,7 +100,6 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        iTestContext.getName();
         run = testRail
                 .runs()
                 .add(currentProject.getId(),

@@ -28,6 +28,7 @@ public class ResultBoardTests extends BaseTest {
             priority = 1,
             testName = "1")
     public void successAddResultTest() {
+        Assert.fail();
         mainPage.clickOnAddResultButton();
         FilePicker filePicker = new FilePicker(driver);
         filePicker.selectFileByName(SDCARD);
@@ -89,6 +90,5 @@ public class ResultBoardTests extends BaseTest {
         mainPage.selectCard(card);
         OverviewPage overviewPage = new OverviewPage(driver);
         MatcherAssert.assertThat(UNEXPECTED_ELEMENT_NAME, overviewPage.getTopResultName(), containsString(TOP_NAME));
-        Assert.fail();
     }
 }

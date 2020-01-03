@@ -1,6 +1,5 @@
 package com.github.frunoman.tests;
 
-import com.github.frunoman.listeners.TestrailListener;
 import com.github.frunoman.pages.OverviewPage;
 import com.github.frunoman.pages.EditResultPage;
 import com.github.frunoman.pages.FilePicker;
@@ -9,8 +8,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;

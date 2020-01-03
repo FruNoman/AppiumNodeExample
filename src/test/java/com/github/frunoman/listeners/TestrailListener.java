@@ -94,12 +94,17 @@ public class TestrailListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
+        iTestContext.getName();
         run = testRail
                 .runs()
                 .add(currentProject.getId(),
                         new Run()
                                 .setSuiteId(currentSuite.getId())
-                                .setName(properties.getProperty(RUN_NAME) + " " + SIMPLE_DATE_FORMAT.format(new Date())))
+                                .setName(properties.getProperty(RUN_NAME)
+                                        + " "
+                                        + iTestContext.getName()
+                                        + " "
+                                        + SIMPLE_DATE_FORMAT.format(new Date())))
                 .execute();
     }
 

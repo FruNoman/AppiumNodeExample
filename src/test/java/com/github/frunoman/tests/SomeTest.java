@@ -20,6 +20,7 @@ import com.android.sdklib.repository.targets.SystemImage;
 import com.android.sdklib.repository.targets.SystemImageManager;
 import com.android.sdklib.tool.SdkManagerCli;
 import com.android.utils.ILogger;
+import com.google.common.io.Files;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -129,13 +130,14 @@ public class SomeTest {
 
             }
         };
+
         AndroidSdkHandler sdkHandler = AndroidSdkHandler.getInstance(new File("/home/dfrolov/Android/Sdk"));
         RepoManager sdkManager = sdkHandler.getSdkManager(progressIndicator);
         AvdManager avdManager = AvdManager.getInstance(sdkHandler, iLogger);
         SystemImageManager systemImageManager = sdkHandler.getSystemImageManager(progressIndicator);
-        SystemImage currentSystemImage=null;
-        for (SystemImage systemImage:systemImageManager.getImages()){
-            if(systemImage.getAndroidVersion().getApiLevel()==27){
+        SystemImage currentSystemImage = null;
+        for (SystemImage systemImage : systemImageManager.getImages()) {
+            if (systemImage.getAndroidVersion().getApiLevel() == 27) {
                 currentSystemImage = systemImage;
                 break;
             }
@@ -146,22 +148,24 @@ public class SomeTest {
                 .getTargetOfAtLeastApiLevel(27, progressIndicator);
 
 
-        Map<String,String> hardwareProperties = new HashMap<>();
+        Map<String, String> hardwareProperties = new HashMap<>();
         Properties properties = new Properties();
         properties.load(new FileInputStream(new File("/home/dfrolov/IdeaProjects/RemoteAppiumGrid/src/main/resources/my.properties")));
         hardwareProperties.putAll(((Map) properties));
 
 
+        Map<String, String> bootConfig = new HashMap<>();
+        Collection<LocalPackage> sourcePackages = sdkManager.getPackages().getLocalPackagesForPrefix(SdkConstants.FD_ANDROID_SOURCES);
+        LocalPackage ndk = sdkHandler.getLocalPackage(SdkConstants.FD_NDK, progressIndicator);
 
-
-
-        Map<String,String> bootConfig = new HashMap<>();
-        Collection<LocalPackage> sourcePackages =  sdkManager.getPackages().getLocalPackagesForPrefix(SdkConstants.FD_ANDROID_SOURCES);
-        LocalPackage ndk = sdkHandler.getLocalPackage(SdkConstants.FD_NDK,progressIndicator);
-
-        DeviceManager deviceManager = DeviceManager.createInstance(new File("/home/dfrolov/Android/Sdk"),iLogger);
+        DeviceManager deviceManager = DeviceManager.createInstance(new File("/home/dfrolov/Android/Sdk"), iLogger);
         deviceManager.getDevices(DeviceManager.DeviceFilter.DEFAULT);
 
+        AvdInfo[] avdInfos = avdManager.getAllAvds();
 
-        AvdInfo avdInfo = avdManager.createAvd(new File("/home/dfrolov/IdeaProjects/RemoteAppiumGrid/allure-results"),"dimaTest",currentSystemImage,new File("/home/dfrolov/Android/Sdk/skins"),"pixel_2","512M",hardwareProperties,bootConfig,false,false,false,iLogger);    }
+        if (avdInfos.length == 0) {
+            AvdInfo avdInfo = avdManager.createAvd(new File(avdManager.getBaseAvdFolder().getAbsolutePath() + File.separator + "avd_" + new Date().getTime()), "test_device", currentSystemImage, new File("/home/dfrolov/Android/Sdk/skins"), "pixel_2", "512M", hardwareProperties, bootConfig, false, false, false, iLogger);
+            System.out.println(avdInfo);
+        }
+    }
 }

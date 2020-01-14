@@ -84,7 +84,11 @@
             <artifactId>testrail-api-java-client</artifactId>
             <version>2.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.android.tools</groupId>
+            <artifactId>sdklib</artifactId>
+            <version>25.3.0</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="methods"  thread-count="10" >
+<suite name="Suite" parallel="tests"  thread-count="10" >
 
 <!--    <test name="tab">-->
 <!--&lt;!&ndash;        <parameter name="udid" value="emulator-5554" />&ndash;&gt;-->
@@ -22,20 +22,37 @@
 
 
     <test name="emulator">
+        <parameter name="udid" value="emulator-5558" />
+
         <classes>
             <class name="com.github.frunoman.tests.ResultBoardTests"/>
         </classes>
     </test>
 
 
-<!--    <test name="pixel 2 phone">-->
-<!--        <parameter name="udid" value="emulator-5554" />-->
-<!--        <classes>-->
-<!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="pixel 2 phone">
+        <parameter name="udid" value="emulator-5554" />
+        <classes>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
+        </classes>
+    </test>
 
-<!--    <test name="pixel 2 tablet">-->
+    <test name="emulator 3">
+        <parameter name="udid" value="emulator-5556" />
+        <classes>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
+        </classes>
+    </test>
+
+    <test name="emulator 4">
+        <parameter name="udid" value="L91HVCPF2244Y" />
+        <classes>
+            <class name="com.github.frunoman.tests.ResultBoardTests"/>
+        </classes>
+    </test>
+
+
+<!--    <test name="denis 2">-->
 <!--        <parameter name="udid" value="emulator-5556" />-->
 <!--        <classes>-->
 <!--            <class name="com.github.frunoman.tests.ResultBoardTests"/>-->

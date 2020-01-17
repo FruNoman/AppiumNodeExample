@@ -33,6 +33,7 @@ public class ResultBoardTests extends BaseTest {
         filePicker.clickSelect();
         MobileElement card = mainPage.findCardByName(ALLURE_RESULT_FILE);
         MatcherAssert.assertThat(UNEXPECTED_ELEMENT_STATE, card.isEnabled(), is(true));
+
     }
 
     @TmsLink("2")
@@ -87,5 +88,6 @@ public class ResultBoardTests extends BaseTest {
         mainPage.selectCard(card);
         OverviewPage overviewPage = new OverviewPage(driver);
         MatcherAssert.assertThat(UNEXPECTED_ELEMENT_NAME, overviewPage.getTopResultName(), containsString(TOP_NAME));
+        Assert.fail();
     }
 }

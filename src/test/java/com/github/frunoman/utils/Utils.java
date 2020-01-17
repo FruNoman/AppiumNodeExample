@@ -82,4 +82,24 @@ public class Utils {
         }
         return screenShot;
     }
+
+    @Attachment(value = "Attachment", type = "text/html")
+    public static byte[] attachText(File video) {
+        byte[] screenShot = new byte[0];
+        try {
+            FileInputStream fis = new FileInputStream(video);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+
+            for (int readNum; (readNum = fis.read(b)) != -1; ) {
+                bos.write(b, 0, readNum);
+            }
+            screenShot = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return screenShot;
+    }
 }

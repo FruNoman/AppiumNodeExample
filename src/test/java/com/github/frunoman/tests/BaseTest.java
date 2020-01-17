@@ -1,8 +1,16 @@
 package com.github.frunoman.tests;
 
+import com.android.prefs.AndroidLocation;
+import com.android.sdklib.internal.avd.AvdInfo;
+import com.android.sdklib.internal.avd.AvdManager;
+import com.android.sdklib.repository.AndroidSdkHandler;
+import com.android.sdklib.repository.targets.SystemImage;
+import com.android.sdklib.repository.targets.SystemImageManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.frunoman.listeners.TestrailListener;
 import com.github.frunoman.pages.MainPage;
+import com.github.frunoman.support.ILoggerImpl;
+import com.github.frunoman.support.ProgressIndicatorImpl;
 import com.github.frunoman.utils.Utils;
 import com.google.common.io.Resources;
 import io.appium.java_client.MobileElement;
@@ -18,6 +26,7 @@ import org.openqa.grid.internal.utils.configuration.GridHubConfiguration;
 import org.openqa.grid.internal.utils.configuration.GridNodeConfiguration;
 import org.openqa.grid.web.Hub;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -40,18 +49,22 @@ public class BaseTest {
     private static Properties properties;
     private static final String APPIUM_MAIN_JS_PATH = "appium.main.js.path";
     private static final String PROJECT_PROPERTIES = "project.properties";
+    private static final String AVD_PROPERTIES = "my.properties";
+
     private static final String SCREEN_RECORD_RESOLUTION = "screen.record.resolution";
     private static final String SCREEN_RECORD_BITRATE = "screen.record.bitrate";
+    private static final String ANDROID_HOME = "android.sdk";
     private static final String SCREEN_RECORD_NAME = "screen.record.name";
     private static final String APP_WAIT_ACTIVITY = "com.github.allureadvanced.*";
     private static final String ALLURE_RESULTS_ZIP = "/sdcard/allure-results.zip";
     private static final String APK = "app-debug.apk";
     protected static final String ALLURE_RESULT_FILE = "allure-results.zip";
-
+    protected static String PROJECT_DIR = System.getProperty("user.dir");
+    private String deviceName;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
-        if(properties==null) {
+        if (properties == null) {
             properties = new Properties();
             properties.load(new FileInputStream(new File(Resources.getResource(PROJECT_PROPERTIES).getPath())));
         }
@@ -70,7 +83,7 @@ public class BaseTest {
 
     @Parameters({"udid", "version"})
     @BeforeTest
-    public void beforeTest(@Optional String udid, @Optional String version) throws IOException, InterruptedException {
+    public void beforeTest(@Optional String udid, @Optional String version) throws IOException, InterruptedException, AndroidLocation.AndroidLocationException {
         GridNodeConfiguration nodeConfiguration = new GridNodeConfiguration();
         nodeConfiguration.hubHost = localhost;
         nodeConfiguration.hubPort = port;
@@ -106,6 +119,34 @@ public class BaseTest {
         DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
         if (udid != null) {
             appiumCapabilities.setCapability(MobileCapabilityType.UDID, udid);
+        } else {
+            AndroidSdkHandler sdkHandler = AndroidSdkHandler.getInstance(new File(properties.getProperty(ANDROID_HOME)));
+            AvdManager avdManager = AvdManager.getInstance(sdkHandler, new ILoggerImpl());
+            AvdInfo[] avdInfos = avdManager.getAllAvds();
+            SystemImageManager systemImageManager = sdkHandler.getSystemImageManager(new ProgressIndicatorImpl());
+            if (avdInfos.length > 0) {
+                deviceName = avdInfos[0].getName();
+            } else {
+                SystemImage currentSystemImage = null;
+                for (SystemImage systemImage : systemImageManager.getImages()) {
+                    if (systemImage.getAndroidVersion().getApiLevel() == 27) {
+                        currentSystemImage = systemImage;
+                        break;
+                    }
+                }
+
+                Map<String, String> hardwareProperties = new HashMap<>();
+                Properties properties = new Properties();
+                properties.load(new FileInputStream(new File(Resources.getResource(AVD_PROPERTIES).getPath())));
+                hardwareProperties.putAll(((Map) properties));
+
+
+                Map<String, String> bootConfig = new HashMap<>();
+                AvdInfo avdInfo = avdManager.createAvd(new File(avdManager.getBaseAvdFolder().getAbsolutePath() + File.separator + "avd_" + new Date().getTime()), "test_device", currentSystemImage, new File("/home/dfrolov/Android/Sdk/skins"), "pixel_2", "512M", hardwareProperties, bootConfig, false, false, false, new ILoggerImpl());
+                deviceName = avdInfo.getName();
+            }
+            appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+            appiumCapabilities.setCapability(AndroidMobileCapabilityType.AVD, deviceName);
         }
         if (version != null) {
             appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
@@ -113,7 +154,6 @@ public class BaseTest {
         appiumCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         appiumCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
         appiumCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-
         appiumCapabilities.setCapability(MobileCapabilityType.APP, Resources.getResource(APK).getPath());
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, APP_WAIT_ACTIVITY);
         appiumCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
@@ -128,7 +168,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    public void beforeMethod() {
+    public void beforeMethod() throws FileNotFoundException {
         mainPage = new MainPage(driver);
         driver.startRecordingScreen(
                 new AndroidStartScreenRecordingOptions()
@@ -151,18 +191,28 @@ public class BaseTest {
             File file = new File(fileName);
             FileUtils.writeByteArrayToFile(file, decode);
             Utils.attachVideo(file);
+            File logFile = new File(PROJECT_DIR + File.separator + "allure-results" + File.separator + "logcat_" + new Date().getTime());
+            List<LogEntry> logEntries = driver.manage().logs().get("logcat").getAll();
+            PrintWriter printWriter = new PrintWriter(logFile);
+            for (LogEntry logEntry : logEntries) {
+                printWriter.println(logEntry);
+            }
+            printWriter.flush();
+            Utils.attachText(logFile);
         }
         driver.resetApp();
     }
 
     @AfterSuite(alwaysRun = true)
     public void afterSuite() throws InterruptedException {
-        if(driver!=null) {
+        if (driver != null) {
             driver.quit();
-        }if(service.isRunning()) {
+        }
+        if (service.isRunning()) {
             service.stop();
             Thread.sleep(3000);
-        }if(gridServer.getUrl()!=null) {
+        }
+        if (gridServer.getUrl() != null) {
             gridServer.stop();
             Thread.sleep(3000);
         }

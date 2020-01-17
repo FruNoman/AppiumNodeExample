@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="tests"  thread-count="10" >
+<suite name="Suite" parallel="methods"  thread-count="10" >
 
 <!--    <test name="tab">-->
 <!--&lt;!&ndash;        <parameter name="udid" value="emulator-5554" />&ndash;&gt;-->
@@ -19,12 +19,14 @@
 <!--    </test>-->
 
 
-    <test name="m 3 note">
-        <parameter name="udid" value="L91HVCPF2244Y" />
+
+
+    <test name="emulator">
         <classes>
             <class name="com.github.frunoman.tests.ResultBoardTests"/>
         </classes>
     </test>
+
 
 <!--    <test name="pixel 2 phone">-->
 <!--        <parameter name="udid" value="emulator-5554" />-->

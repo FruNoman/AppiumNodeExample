@@ -8,6 +8,7 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.TmsLink;
 import org.hamcrest.MatcherAssert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
